@@ -39,13 +39,6 @@ test {
     useJUnitPlatform()
 }
 
-/*
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.compilerArgs = [ '-Werror', '-Xlint:all', '-Xlint:-deprecation' ]
-}
-*/
-
 tasks.named('wrapper') {
     distributionType = Wrapper.DistributionType.ALL
 }
@@ -60,12 +53,6 @@ task codeCoverageReport(type: JacocoReport) {
     }
 }
 
-tasks.named('jacocoTestReport') {
-    reports {
-        xml.enabled = true
-    }
-}
-
 tasks.named('check') {
     dependsOn jacocoTestReport
     dependsOn javadoc
@@ -75,11 +62,6 @@ tasks.named('jar') {
     manifest {
         attributes('Automatic-Module-Name': 'io.vavr')
     }
-}
-
-tasks.register('testSourcesJar', Jar) {
-    from sourceSets.test.allSource
-    archiveClassifier = 'test-sources'
 }
 
 codeCoverageReport.dependsOn {
@@ -108,8 +90,6 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
-            // vavr also publishes a test sources jar
-            artifact tasks.named('testSourcesJar')
             pom {
                 name = project.name
                 description = "Jackson datatype module for Vavr.io"
@@ -163,6 +143,7 @@ nexusPublishing {
     }
 }
 
+// Skip warnings when building with a higher version of java than 8
 if (JavaVersion.current().isJava8Compatible()) {
     allprojects {
         tasks.withType(Javadoc).tap {
