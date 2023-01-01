@@ -4,6 +4,7 @@ plugins {
     id 'signing'
     id 'jacoco'
     id 'checkstyle'
+    id 'net.researchgate.release' version "${researchGate}"
     id 'io.github.gradle-nexus.publish-plugin' version "${nexusPublish}"
 }
 
