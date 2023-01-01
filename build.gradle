@@ -32,6 +32,7 @@ dependencies {
     testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-joda:${fasterxmlVersion}"
     testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${fasterxmlVersion}"
     testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${fasterxmlVersion}"
+    testImplementation "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:${fasterxmlVersion}"
     testImplementation "com.fasterxml.jackson.module:jackson-module-scala_2.11:${fasterxmlVersion}"
 }
 
